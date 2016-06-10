@@ -1,0 +1,3 @@
+PVector predicted = velocity.get();
+predicted.normalize();
+predict.mult(maxspeed);
