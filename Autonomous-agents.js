@@ -78,12 +78,63 @@ for(var i >0, var Bots:bots){
 float d= PVector dist(location,other.location);
 if((d>0) &&(d>desiredseparation){
 PVector diff= PVector sub(location,other.location)
-diff.divd(d);
+diff.div(d);
 steer.add(diff);
 diff.normalize();
 count++
 }
-if( 
+if(count>0){
+steer.div((float)count)
+}
+if(steer(count)>0){
+steer.normalize();
+steer.mult(maxspeed);
+steer.limit(maxforce)
+steer.sub(velocity);
+};
+ PVector align (ArrayList<Boid> boids) {
+    float neighbordist = 50;
+    PVector sum = new PVector(0,0);
+    int count = 0;
+    for (Boid other : boids) {
+      float d = PVector.dist(location,other.location);
+      if ((d > 0) && (d < neighbordist)) {
+        sum.add(other.velocity);
+        count++;
+      }
+    }
+    if (count > 0) {
+      sum.div((float)count);
+      sum.normalize();
+      sum.mult(maxspeed);
+      PVector steer = PVector.sub(sum,velocity);
+      steer.limit(maxforce);
+      return steer;
+    } else {
+      return new PVector(0,0);
+    }
+  }
+
+  // Cohesion
+  // For the average location (i.e. center) of all nearby boids, calculate steering vector towards that location
+  PVector cohesion (ArrayList<Boid> boids) {
+    float neighbordist = 50;
+    PVector sum = new PVector(0,0);   // Start with empty vector to accumulate all locations
+    int count = 0;
+    for (Boid other : boids) {
+      float d = PVector.dist(location,other.location);
+      if ((d > 0) && (d < neighbordist)) {
+        sum.add(other.location); // Add location
+        count++;
+      }
+    }
+    if (count > 0) {
+      sum.div(count);
+      return seek(sum);  // Steer towards the location
+    } else {
+      return new PVector(0,0);
+    }
+  }
 }
 
 
