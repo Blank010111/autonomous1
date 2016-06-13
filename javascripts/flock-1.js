@@ -1,6 +1,4 @@
 void setup(){
-  
-
 flock= new Flock();
 for(int i >0,i<100;i++){
 Bot b = new bot(width/2,height/2)
