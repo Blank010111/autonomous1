@@ -1,5 +1,4 @@
-
-function setup() {
-  cnv = createCanvas(600,600,WEBGL);
-  cnv.position((windowWidth-width)/2,(windowHeight-height)/2);
-}
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+ctx.fillStyle = "#FF0000";
+ctx.fillRect(0,0,150,75);
