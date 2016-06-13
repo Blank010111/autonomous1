@@ -1,6 +1,5 @@
 var bots;
 var Bots;
-var space;
 class Bots{
 Pvector location;
 PVector velocity;
@@ -39,7 +38,7 @@ applyforce(ali);
 applyforce(coh);
 };
 void seek(PVector target){
-PVector desired = PVector.sub(space-target,space-location);
+PVector desired = PVector.sub(target,location);
 desired.normalize();
 desired.mult(maxspeed);
 PVector target = PVector.sub(desired,velocity);
